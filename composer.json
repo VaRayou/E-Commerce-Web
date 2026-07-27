@@ -1,7 +1,0 @@
-{
-  "name": "my-app/news-site",
-  "description": "PHP News Application",
-  "require": {
-    "php": "^8.1"
-  }
-}

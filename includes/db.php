@@ -1,12 +1,13 @@
 <?php
 session_start();
 
-$host = "localhost";
-$username = "root";
-$password = "";
-$database = "db_sv13.23";
+$host = getenv('DB_HOST') ?: 'localhost';
+$username = getenv('DB_USER') ?: 'root';
+$password = getenv('DB_PASS') ?: '';
+$database = getenv('DB_NAME') ?: 'db_sv13.23';
+$port = (int) (getenv('DB_PORT') ?: 3306);
 
-$conn = new mysqli($host, $username, $password, $database);
+$conn = new mysqli($host, $username, $password, $database, $port);
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
