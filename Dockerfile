@@ -1,10 +1,9 @@
-# # Use official PHP image with Apache web server
-# FROM php:8.2-apache
+FROM php:8.2-apache
 
-# # Copy all your project files into Apache's server directory
-# COPY . /var/www/html/
+RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
 
-# # Expose HTTP port
-# EXPOSE 80
+COPY . /var/www/html/
 
-# RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
+RUN chown -R www-data:www-data /var/www/html
+
+EXPOSE 80
