@@ -7,7 +7,13 @@ $password = getenv('DB_PASS') ?: '';
 $database = getenv('DB_NAME') ?: 'db_sv13.23';
 $port = (int) (getenv('DB_PORT') ?: 3306);
 
-$conn = new mysqli($host, $username, $password, $database, $port);
+$conn = new mysqli();
+if (getenv('DB_HOST')) {
+    $conn->ssl_set(null, null, '/etc/ssl/certs/ca-certificates.crt', null, null);
+    $conn->real_connect($host, $username, $password, $database, $port, null, MYSQLI_CLIENT_SSL);
+} else {
+    $conn->real_connect($host, $username, $password, $database, $port);
+}
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
