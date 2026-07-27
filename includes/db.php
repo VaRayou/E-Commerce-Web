@@ -12,7 +12,7 @@ if (getenv('DB_HOST')) {
     $conn->ssl_set(null, null, '/etc/ssl/certs/ca-certificates.crt', null, null);
     $conn->real_connect($host, $username, $password, $database, $port, null, MYSQLI_CLIENT_SSL);
 } else {
-    $conn->real_connect($host, $username, $password, $database, $port);
+    $conn = new mysqli($host, $username, $password, $database, (int)$port);
 }
 
 if ($conn->connect_error) {
